@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Enlightenment | Middle School History</title>
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./enlightenment.css" />
+
+  <!-- UPDATED: Thinkers gallery grid styles (no scroll, transparent, fits all 6) -->
+  <style>
+    .thinkerGrid{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: center;
+
+      /* keep the whole group centered */
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 980px){
+      .thinkerGrid{ grid-template-columns: repeat(3, 1fr); max-width: 820px; }
+    }
+
+    @media (max-width: 560px){
+      .thinkerGrid{ grid-template-columns: repeat(2, 1fr); max-width: 520px; }
+    }
+
+    .thinkerGrid a{ display:block; }
+
+    .thinkerGrid img{
+      width: 100%;
+      height: 320px;      /* adjust to 300px if you want slightly shorter */
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="topic enlightenment">
+  <div id="siteHeader"></div>
+
+  <main id="content">
+    <!-- HERO -->
+    <section class="hero" aria-label="The Enlightenment hero">
+      <div class="card hero-left">
+        <span class="kicker">Reason • Rights • Revolutions</span>
+        <h1>The Enlightenment</h1>
+
+        <p class="sub">
+          In the 1600s and 1700s, many European thinkers argued that people should use
+          <span class="vocabWord" data-def="Careful thinking based on evidence and logic.">reason</span>
+          to understand the world—and that governments should protect
+          <span class="vocabWord" data-def="Basic freedoms people are born with, like life and liberty.">natural rights</span>.
+          These ideas helped inspire revolutions and shaped the
+          <span class="vocabWord" data-def="The plan of government for the United States, written in 1787.">U.S. Constitution</span>.
+        </p>
+
+        <div class="callout">
+          <span class="label">Time period:</span> <span class="value">1600s–1700s</span> •
+          <span class="label">Focus:</span> <span class="value">thinking, rights, and better government</span>
+        </div>
+
+        <div class="bigIdeaWrap" aria-label="Big Idea">
+          <div class="bigIdeaGraphic">
+            <img
+              src="/assets/images/ui/bigidea.png"
+              alt="Big Idea graphic"
+              width="150"
+              height="92"
+            />
+          </div>
+          <div class="bigIdeaText">
+            Enlightenment thinkers argued that government should be based on reason—and exist to protect people’s rights.
+          </div>
+        </div>
+
+        <div class="pillrow" aria-label="Topic tags">
+          <span class="pill">🧠 Reason</span>
+          <span class="pill">🗳️ Rights</span>
+          <span class="pill">🏛️ Government</span>
+          <span class="pill">⚖️ Laws</span>
+          <span class="pill">📜 Constitution</span>
+        </div>
+      </div>
+
+      <aside class="card hero-right" aria-label="Hero image and navigation">
+        <div class="portraitWrap">
+          <div class="portrait" role="img" aria-label="Enlightenment-era library">
+            <img src="images/enlightenment_library.webp" alt="Enlightenment-era library" />
+          </div>
+
+          <div class="portraitButtons" aria-label="Navigation">
+            <a class="pbtn prev is-hidden" href="#" aria-hidden="true" tabindex="-1">
+              <div class="pbtnTop">
+                <span class="emoji" aria-hidden="true">⬅️</span>
+                <span class="label">Previous</span>
+              </div>
+              <div class="pbtnSub">—</div>
+            </a>
+
+            <div class="pbtn spacer" aria-hidden="true"></div>
+
+            <!-- Explore links to the first thinker page -->
+            <a class="pbtn next" href="thinkers/locke.html" title="Start with John Locke">
+              <div class="pbtnTop">
+                <span class="label">Explore</span>
+                <span class="emoji" aria-hidden="true">➡️</span>
+              </div>
+              <div class="pbtnSub">John Locke</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="jumpRow">
+          <a class="pill" href="#thinkers">
+            🖼️ <span class="u">Jump to the Thinker Gallery</span>
+          </a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- BACKGROUND -->
+    <section class="card full" aria-label="Background">
+      <div class="section">
+        <h2>What Was the Enlightenment?</h2>
+
+        <p>
+          The Enlightenment was an intellectual movement that spread across Europe in the 1600s and 1700s. Many thinkers believed that people
+          could improve society by using
+          <span class="vocabWord" data-def="Careful thinking based on evidence and logic.">reason</span>
+          instead of relying only on tradition or authority. They asked big questions:
+          <i>What makes a government fair?</i> <i>What rights should everyone have?</i> <i>When is it okay to change a government?</i>
+        </p>
+
+        <p>
+          Enlightenment writers often criticized
+          <span class="vocabWord" data-def="A government where one ruler has almost total power.">absolute monarchy</span>
+          and supported ideas like
+          <span class="vocabWord" data-def="A government’s power should come from the people.">popular sovereignty</span>
+          and
+          <span class="vocabWord" data-def="An agreement between rulers and the people: the people obey laws, and the government protects their rights.">social contract</span>.
+          Their books, essays, and debates spread through coffeehouses and
+          <span class="vocabWord" data-def="Gatherings (often in homes) where people discussed art, science, and politics.">salons</span>,
+          helping ideas travel across borders.
+        </p>
+
+        <p>
+          These ideas mattered far beyond Europe. American colonists read Enlightenment authors and used their arguments when creating a new country.
+          When the United States wrote its Constitution, it built a government designed to protect liberty and limit power.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONNECTIONS TO THE DECLARATION OF INDEPENDENCE + CONSTITUTION -->
+    <section class="card full" aria-label="Connections to the Declaration of Independence and the U.S. Constitution" id="connections">
+      <div class="section">
+        <h2>Connections to the Declaration of Independence &amp; the U.S. Constitution</h2>
+
+        <div class="mediaRow">
+          <div class="mediaImg">
+            <img src="images/doi_drafting.webp" alt="Drafting the Declaration of Independence" />
+          </div>
+
+          <div class="mediaText">
+            <p>
+              Enlightenment ideas helped shape two key American documents: the <b>Declaration of Independence</b> (1776) and the
+              <b>U.S. Constitution</b> (1787). The Declaration explains <i>why</i> the colonists believed they could break away from Britain,
+              and the Constitution explains <i>how</i> the new government would work—while preventing
+              <span class="vocabWord" data-def="Cruel or unfair use of power.">tyranny</span>.
+            </p>
+
+            <ul class="bullets">
+              <li>
+                <b>John Locke:</b> People have
+                <span class="vocabWord" data-def="Basic freedoms people are born with, like life and liberty.">natural rights</span>.
+                The Declaration echoes this idea with “life” and “liberty,” and the claim that government exists to protect rights.
+                If a government violates rights, people can change it—an idea connected to the
+                <span class="vocabWord" data-def="An agreement between rulers and the people: the people obey laws, and the government protects their rights.">social contract</span>.
+              </li>
+
+              <li>
+                <b>Charles Montesquieu:</b> To stop abuse of power, government should be divided into parts. The Constitution uses
+                <span class="vocabWord" data-def="Dividing power among branches (like legislative, executive, and judicial).">separation of powers</span>
+                so no one person or group controls everything.
+              </li>
+
+              <li>
+                <b>Jean-Jacques Rousseau:</b> Legitimate government should reflect the people. The Declaration talks about government based on the people’s agreement,
+                and the Constitution begins with “We the People,” tying to
+                <span class="vocabWord" data-def="A government’s power should come from the people.">popular sovereignty</span>.
+              </li>
+
+              <li>
+                <b>Mary Wollstonecraft:</b> Enlightenment ideas about rights raised an important question: <i>Who counts?</i> Wollstonecraft argued that women should have
+                education and rights too. Over time, Americans used Enlightenment language about equality and rights to push for expanding rights to more people.
+              </li>
+            </ul>
+
+            <p>
+              Together, these documents show Enlightenment influence in two ways: the Declaration argues for <b>rights and justified government</b>,
+              and the Constitution builds a system designed to <b>limit power</b> and protect liberty through structure and laws.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DID YOU KNOW -->
+    <section class="didYouKnow" aria-label="Did you know feature">
+      <div class="dykImg" aria-label="Did you know banner">
+        <img src="/assets/images/ui/didyouknow.png" alt="Did you know" width="200" height="78" />
+      </div>
+      <div class="fact">
+        Some Enlightenment writers used <b>pen names</b> or wrote secretly because criticizing kings and churches could lead to <b>censorship</b>—or even prison.
+      </div>
+    </section>
+
+    <!-- CORE IDEAS -->
+    <section class="card full" aria-label="🔑Key Ideas of the Enlightenment">
+      <div class="section">
+        <h2>Core Ideas of the Enlightenment</h2>
+
+        <div class="factsList">
+          <div class="factItem">
+            <b>1. Reason</b><br />
+            Human reason is the best tool for understanding the world.<br />
+            Logic &gt; blind faith or inherited tradition.
+          </div>
+
+          <div class="factItem">
+            <b>2. Science &amp; the Scientific Method</b><br />
+            Knowledge should come from observation and experimentation.<br />
+            Built on thinkers like Isaac Newton (even if he’s more science than philosophy).
+          </div>
+
+          <div class="factItem">
+            <b>3. Natural Rights</b><br />
+            People are born with rights (like life, liberty, and property).<br />
+            Governments exist to protect those rights—not take them away.
+          </div>
+
+          <div class="factItem">
+            <b>4. Progress</b><br />
+            Society can improve through education, reform, and rational thinking.<br />
+            History doesn’t have to repeat itself forever.
+          </div>
+
+          <div class="factItem">
+            <b>5. Skepticism of Authority</b><br />
+            Kings, churches, and governments should not be obeyed just because they have power.<br />
+            Authority must be justified.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK FACTS + VOCAB -->
+    <section class="grid2" aria-label="Quick facts and vocabulary">
+      <article class="card section" aria-label="Quick Facts">
+        <h2>Quick Facts</h2>
+        <div class="factsList">
+          <div class="factItem"><b>Where?</b> Mostly Europe, especially France and Britain</div>
+          <div class="factItem"><b>When?</b> 1600s–1700s</div>
+          <div class="factItem"><b>Big question:</b> “What is a fair government?”</div>
+          <div class="factItem"><b>Big impact:</b> American &amp; French Revolutions</div>
+          <div class="factItem"><b>Key idea:</b> Power should be limited and accountable</div>
+        </div>
+      </article>
+
+      <article class="card section" aria-label="Vocabulary">
+        <h2>Key Vocabulary</h2>
+        <div class="vocab">
+          <div class="term"><b>Enlightenment</b> — a movement that promoted reason, science, and rights.</div>
+          <div class="term"><b>natural rights</b> — basic rights people are born with.</div>
+          <div class="term"><b>social contract</b> — an agreement between the people and their government.</div>
+          <div class="term"><b>separation of powers</b> — dividing government jobs among branches.</div>
+          <div class="term"><b>checks and balances</b> — each branch can limit the others.</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- THINKERS GALLERY (FIXED: now present + new style) -->
+    <section class="card full" aria-label="Thinkers gallery" id="thinkers">
+      <div class="section">
+        <h2>
+          Meet the Thinkers!
+          <span style="font-size:.75em; font-weight:400; opacity:.75;">
+            – click on a portrait below to learn more.
+          </span>
+        </h2>
+
+        <div class="thinkerGrid" aria-label="Thinkers grid">
+          <a href="thinkers/locke.html" aria-label="John Locke">
+            <img src="images/locke_framed.webp" alt="John Locke" />
+          </a>
+          <a href="thinkers/montesquieu.html" aria-label="Montesquieu">
+            <img src="images/montesquieu_framed.webp" alt="Montesquieu" />
+          </a>
+          <a href="thinkers/rousseau.html" aria-label="Rousseau">
+            <img src="images/rousseau_framed.webp" alt="Rousseau" />
+          </a>
+          <a href="thinkers/voltaire.html" aria-label="Voltaire">
+            <img src="images/voltaire_framed.webp" alt="Voltaire" />
+          </a>
+          <a href="thinkers/hobbes.html" aria-label="Hobbes">
+            <img src="images/hobbes_framed.webp" alt="Hobbes" />
+          </a>
+          <a href="thinkers/wollstonecraft.html" aria-label="Wollstonecraft">
+            <img src="images/wollstonecraft_framed.webp" alt="Wollstonecraft" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section class="card full" aria-label="Glossary">
+      <div class="section">
+        <h2>Glossary</h2>
+        <div class="vocab">
+          <div class="term"><b>reason</b> — careful thinking based on evidence and logic.</div>
+          <div class="term"><b>natural rights</b> — rights people are born with, like life and liberty.</div>
+          <div class="term"><b>social contract</b> — an agreement between the people and their government.</div>
+          <div class="term"><b>separation of powers</b> — dividing government power into branches.</div>
+          <div class="term"><b>checks and balances</b> — ways each branch can limit the others.</div>
+          <div class="term"><b>tyranny</b> — unfair or cruel use of power.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="./config.js"></script>
+  <script src="/include.js"></script>
+</body>
+</html>

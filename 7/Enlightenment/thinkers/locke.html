@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>John Locke | The Enlightenment</title>
+  <meta name="description" content="John Locke: Enlightenment thinker whose ideas about natural rights influenced the Declaration of Independence." />
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="../enlightenment.css" />
+
+  <style>
+    @font-face{
+      font-family: "ChalkFont";
+      src: url("/assets/fonts/chalkfont-regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ===== Chalkboard (To Help You Remember) ===== */
+    .rememberChalk{
+      background:
+        linear-gradient(0deg, rgba(0,0,0,.40), rgba(0,0,0,.40)),
+        url("/assets/images/backgrounds/chalk.webp");
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(212,175,55,.35);
+
+      /* breathing room so content isn't pinned to top */
+      padding: 1.35rem 1rem 1.6rem;
+    }
+
+    .rememberChalk .dykImg{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Logo is half of chalkboard width */
+    .rememberChalk .dykImg img{
+      width: 50%;
+      height: auto;
+      display: block;
+    }
+
+    .rememberChalk .fact{
+      font-family: "ChalkFont", system-ui, sans-serif;
+      text-align: center;
+      color: rgba(255,255,255,.95);
+      letter-spacing: .4px;
+      line-height: 1.18;
+    }
+
+    /* Only the underlined L's should be gold */
+    .rememberChalk .gold{
+      color: rgba(242,215,122,.98);
+      font-weight: 900;
+    }
+
+    .rememberChalk .lineBig{
+      font-size: clamp(2rem, 4.2vw, 2.9rem);
+      font-weight: 900;
+      margin-bottom: .45rem;
+    }
+
+    .rememberChalk .lineSmall{
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 800;
+      margin-bottom: .55rem;
+      color: rgba(242,215,122,.98); /* all yellow */
+    }
+
+    /* ===== Thinkers Grid (no scroll, transparent, no labels/boxes) ===== */
+    .thinkerGrid{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: center;
+
+      /* center the group */
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 980px){
+      .thinkerGrid{ grid-template-columns: repeat(3, 1fr); max-width: 820px; }
+    }
+
+    @media (max-width: 560px){
+      .thinkerGrid{ grid-template-columns: repeat(2, 1fr); max-width: 520px; }
+    }
+
+    .thinkerGrid a{ display:block; }
+
+    .thinkerGrid img{
+      width: 100%;
+      height: 320px;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="topic enlightenment">
+  <div id="siteHeader"></div>
+
+  <main id="content">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="John Locke hero">
+      <div class="card hero-left">
+        <div class="center" style="display:flex; align-items:center; justify-content:center; gap:.6rem; flex-wrap:wrap;">
+          <span style="color: var(--gold); font-weight:1000;">Thinker of:</span>
+          <span class="kicker">Natural Rights • Government • Consent</span>
+        </div>
+
+        <h1 class="center">John Locke</h1>
+
+        <p class="sub center" style="max-width: 70ch; margin-left:auto; margin-right:auto;">
+          John Locke was an English philosopher during the Enlightenment who focused on the structure of governments—and
+          argued that people are born with natural rights.
+        </p>
+
+        <div class="bigIdeaWrap" aria-label="Big Idea">
+          <div class="bigIdeaGraphic">
+            <img
+              src="/assets/images/ui/bigidea.png"
+              alt="Big Idea graphic"
+              width="150"
+              height="92"
+            />
+          </div>
+          <div class="bigIdeaText">
+            Locke argued that government should protect natural rights—and that these rights are not given by government.
+          </div>
+
+          <div class="factsList" style="margin-top: .9rem;">
+            <div class="factItem"><b>Country:</b> <em>England</em></div>
+            <div class="factItem"><b>Time period:</b> <em>Enlightenment (1600s–1700s)</em></div>
+            <div class="factItem"><b>Key book:</b> <em><i>Two Treatises of Government</i> (1690)</em></div>
+            <div class="factItem"><b>Big idea:</b> <em>Natural rights (life, liberty, property)</em></div>
+            <div class="factItem"><b>Influence:</b> <em>Declaration of Independence (1776)</em></div>
+          </div>
+        </div>
+
+        <div class="pillrow" aria-label="Topic tags">
+          <span class="pill">🧠 Reason</span>
+          <span class="pill">🗳️ Rights</span>
+          <span class="pill">🏛️ Government</span>
+          <span class="pill">📜 Natural Rights</span>
+          <span class="pill">⚖️ Liberty</span>
+        </div>
+      </div>
+
+      <aside class="card hero-right" aria-label="Portrait and navigation">
+        <div class="portraitWrap">
+          <div class="portrait" role="img" aria-label="Portrait of John Locke">
+            <img src="../images/locke.webp" alt="John Locke" />
+          </div>
+
+          <div class="portraitButtons" aria-label="Navigation">
+            <a class="pbtn prev" href="../index.html" title="Back to The Enlightenment">
+              <div class="pbtnTop">
+                <span class="emoji" aria-hidden="true">⬅️</span>
+                <span class="label">Back</span>
+              </div>
+              <div class="pbtnSub">The Enlightenment</div>
+            </a>
+
+            <div class="pbtn spacer" aria-hidden="true"></div>
+
+            <a class="pbtn next" href="montesquieu.html" title="Next: Montesquieu">
+              <div class="pbtnTop">
+                <span class="label">Next</span>
+                <span class="emoji" aria-hidden="true">➡️</span>
+              </div>
+              <div class="pbtnSub">Montesquieu</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="jumpRow">
+          <a class="pill" href="#thinkers">
+            🖼️ <span class="u">Jump to the Thinker Gallery</span>
+          </a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- BACKGROUND -->
+    <section class="card full" aria-label="Background">
+      <div class="section">
+        <h2>Background</h2>
+
+        <p>
+          John Locke was an English
+          <span class="vocabWord" data-def="A person who studies big questions about ideas, truth, and how society should work.">philosopher</span>
+          during the Enlightenment who focused on the structure of governments. Locke believed that people were naturally kind and, when given the choice,
+          would help others before helping themselves. In other words, he thought most people could use
+          <span class="vocabWord" data-def="Careful thinking based on evidence and logic.">reason</span>
+          to solve problems.
+        </p>
+
+        <p>
+          Since people were naturally good at heart, Locke believed that a strict government was not necessary. He argued that communities could work out
+          problems by openly compromising with one another. For Locke, a good government doesn’t exist to control every part of life—its purpose is to set
+          fair rules, settle disputes, and protect people from having their rights violated.
+        </p>
+      </div>
+    </section>
+
+    <!-- TWO TREATISES -->
+    <section class="card full" aria-label="Two Treatises of Government">
+      <div class="section">
+        <h2><i>Two Treatises of Government</i> (1690)</h2>
+
+        <p>
+          In his famous book on government, <i>Two Treatises of Government</i> (1690), Locke wrote about the relationship between government and its people.
+          He challenged the idea that kings should rule with unlimited power. Instead, Locke argued that government should be based on an agreement between
+          the people and the leaders who govern them.
+        </p>
+
+        <p>
+          Locke believed that a government’s power should come from the people’s
+          <span class="vocabWord" data-def="Permission or agreement. In government, it means people allow leaders to rule.">consent</span>.
+          If leaders are supposed to protect the people, then leaders must follow laws and rules too. If they do not, the government is no longer doing its job.
+        </p>
+      </div>
+    </section>
+
+    <!-- DID YOU KNOW -->
+    <section class="didYouKnow" aria-label="Did you know feature">
+      <div class="dykImg" aria-label="Did you know banner">
+        <img src="/assets/images/ui/didyouknow.png" alt="Did you know" width="200" height="78" />
+      </div>
+      <div class="fact">
+        Many kings and rulers feared Locke’s ideas—because he argued that people could replace a government that refused to protect their rights.
+      </div>
+    </section>
+
+    <!-- NATURAL RIGHTS -->
+    <section class="card full" aria-label="Natural Rights">
+      <div class="section">
+        <h2>Natural Rights</h2>
+
+        <p>
+          In <i>Two Treatises of Government</i>, Locke wrote about what he called
+          <span class="vocabWord" data-def="Basic rights you are born with; not granted by government.">natural rights</span>—rights that are granted to you by nature
+          (or God) upon birth. These rights, Locke argued, are not given to you by government and, as a result, government cannot take them away.
+        </p>
+
+        <p>
+          The rights that all people have, according to Locke’s natural rights, are the right to <b>life</b>, <b>liberty</b>, and the right to own
+          <span class="vocabWord" data-def="Things people own, such as land, money, or belongings.">property</span>.
+          Locke believed that the main job of government is to protect these rights. If government protects rights, people will usually accept its authority.
+          If it violates rights, it loses the trust of the people.
+        </p>
+      </div>
+    </section>
+
+    <!-- INFLUENCE -->
+    <section class="card full" aria-label="Influence on 1776">
+      <div class="section">
+        <h2>Influence on the Declaration of Independence</h2>
+
+        <p>
+          Locke’s ideas traveled far beyond England. American colonists read Enlightenment thinkers and used their arguments to explain why a government
+          should not have unlimited power. In 1776, Thomas Jefferson would borrow Locke’s words when he wrote that all people have
+          <span class="vocabWord" data-def="Rights that cannot be taken away.">inalienable rights</span>
+          (rights that cannot be taken away), such as life, liberty, and the pursuit of happiness.
+        </p>
+
+        <p>
+          Jefferson changed Locke’s wording slightly—Locke listed “property,” while Jefferson wrote “pursuit of happiness.” But the key idea stayed the same:
+          people have rights that exist before government, and government’s job is to protect them.
+        </p>
+      </div>
+    </section>
+
+    <!-- TO HELP YOU REMEMBER (chalkboard) -->
+    <section class="didYouKnow rememberChalk" aria-label="To Help You Remember feature">
+      <div class="dykImg" aria-label="To Help You Remember banner">
+        <img src="/assets/images/ui/helpremember.png" alt="To Help You Remember" />
+      </div>
+
+      <div class="fact">
+        <div class="lineBig">
+          <span class="gold"><u>L</u></span> is for <u>L</u>ocke
+        </div>
+
+        <div class="lineSmall">
+          <u>L</u> is also for…
+        </div>
+
+        <div class="lineBig">
+          <span class="gold"><u>L</u></span>ife, <span class="gold"><u>L</u></span>iberty, and <span class="gold"><u>L</u></span>and!
+        </div>
+
+        <div class="lineBig" style="color:rgba(242,215,122,.98); margin-bottom:0;">
+          His Natural Rights!
+        </div>
+      </div>
+    </section>
+
+    <!-- THINKERS GALLERY -->
+    <section class="card full" aria-label="Thinkers gallery" id="thinkers">
+      <div class="section">
+        <h2>
+          Meet the Other Thinkers!
+          <span style="font-size:.75em; font-weight:400; opacity:.75;">
+            – click on a portrait below to learn more.
+          </span>
+        </h2>
+
+        <!-- Locke intentionally removed on Locke's page -->
+        <div class="thinkerGrid" aria-label="Thinkers grid">
+          <a href="montesquieu.html"><img src="../images/montesquieu_framed.webp" alt="Montesquieu"></a>
+          <a href="rousseau.html"><img src="../images/rousseau_framed.webp" alt="Rousseau"></a>
+          <a href="voltaire.html"><img src="../images/voltaire_framed.webp" alt="Voltaire"></a>
+          <a href="hobbes.html"><img src="../images/hobbes_framed.webp" alt="Hobbes"></a>
+          <a href="wollstonecraft.html"><img src="../images/wollstonecraft_framed.webp" alt="Wollstonecraft"></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="siteFooter"></div>
+
+  <script src="../config.js"></script>
+  <script src="/include.js"></script>
+</body>
+</html>

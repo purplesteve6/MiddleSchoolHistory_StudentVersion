@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Middle School History with Mr. Sovocool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <!-- TOP BAR (Search/Shop only, right aligned) -->
+    <div class="topbar">
+      <div class="top-actions">
+        <a class="top-link" href="/search/">Search 🔎</a>
+        <a class="top-link" href="/shop/">Shop 🛒</a>
+      </div>
+    </div>
+
+    <!-- BOTTOM BAR (Logo flush-left, menu centered) -->
+    <nav class="main-nav" aria-label="Primary">
+      <!-- LOGO -->
+      <a class="nav-logo" href="/" aria-label="Home">
+        <img
+          class="nav-logo-img logo-icon"
+          src="/assets/images/logo/MSHistory_Logo_Basic_Web.png"
+          alt="Middle School History with Mr. Sovocool"
+        />
+        <img
+          class="nav-logo-img logo-text"
+          src="/assets/images/logo/MSHistory_Logo_Text_Basic.png"
+          alt=""
+          aria-hidden="true"
+        />
+      </a>
+
+      <!-- CENTERED NAV ITEMS -->
+      <div class="nav-inner">
+        <ul class="nav-list">
+
+          <!-- HOME -->
+          <li class="nav-item" data-menu="home">
+            <a class="nav-link" href="/">
+              <span class="nav-icon">
+                <img src="/assets/images/icons/home_icon.png" alt="" aria-hidden="true">
+              </span>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+
+          <!-- GRADE 6 -->
+          <li class="nav-item has-dropdown" data-menu="g6">
+            <a class="nav-link" href="/6/">
+              <span class="nav-icon">
+                <img src="/assets/images/icons/6_icon.png" alt="" aria-hidden="true">
+              </span>
+              <span class="nav-text">Grade 6</span>
+            </a>
+          </li>
+
+          <!-- GRADE 7 -->
+          <li class="nav-item has-dropdown" data-menu="g7">
+            <a class="nav-link" href="/7/">
+              <span class="nav-icon">
+                <img src="/assets/images/icons/7_icon.png" alt="" aria-hidden="true">
+              </span>
+              <span class="nav-text">Grade 7</span>
+            </a>
+          </li>
+
+          <!-- GRADE 8 -->
+          <li class="nav-item has-dropdown" data-menu="g8">
+            <a class="nav-link" href="/8/">
+              <span class="nav-icon">
+                <img src="/assets/images/icons/8_icon.png" alt="" aria-hidden="true">
+              </span>
+              <span class="nav-text">Grade 8</span>
+            </a>
+          </li>
+
+          <!-- TEACHER RESOURCES -->
+          <li class="nav-item" data-menu="teacher">
+            <a class="nav-link" href="/teacher-resources/">
+              <span class="nav-icon">
+                <img src="/assets/images/icons/TeacherResources_icon.png" alt="" aria-hidden="true">
+              </span>
+              <span class="nav-text">Teacher Resources</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- DROPDOWN BAND -->
+      <div class="dropdown-band" id="dropdownBand" aria-hidden="true">
+        <div class="dropdown-inner">
+          <div class="dropdown-arrow" id="dropdownArrow" aria-hidden="true"></div>
+
+          <div class="dropdown-panel" data-panel="g6">
+            <a class="topic-link" href="/6/GreekMythology/">Greek Mythology</a>
+            <a class="topic-link" href="/6/RomanEmperors/">Roman Emperors</a>
+            <span class="topic-link is-muted" aria-disabled="true">More coming soon…</span>
+          </div>
+
+          <div class="dropdown-panel" data-panel="g7">
+  <a class="topic-link" href="/7/Enlightenment/">The Enlightenment</a>
+  <span class="topic-link is-muted" aria-disabled="true">More coming soon…</span>
+</div>
+
+
+          <div class="dropdown-panel" data-panel="g8">
+            <span class="topic-link is-muted" aria-disabled="true">
+              Grade 8 topics coming soon…
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <!-- FEATURED HERO -->
+    <section class="featured-hero" aria-label="Featured Content">
+      <a class="featured-hero-link" id="featuredLink" href="#">
+        <div class="featured-hero-media" id="featuredMedia"></div>
+
+        <div class="featured-hero-overlay">
+          <div class="featured-hero-badge" id="featuredBadge">Featured Content</div>
+          <h1 class="featured-hero-title" id="featuredTitle">Loading…</h1>
+          <p class="featured-hero-desc" id="featuredDesc"></p>
+          <div class="featured-hero-cta">Open Topic →</div>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <hr class="footer-rule" />
+
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img
+          src="/assets/images/logo/MSHistory_Logo_Basic_Web.png"
+          alt="Middle School History"
+          class="footer-logo-icon"
+        />
+        <img
+          src="/assets/images/logo/MSHistory_Logo_Text_Basic.png"
+          alt=""
+          aria-hidden="true"
+          class="footer-logo-text"
+        />
+      </div>
+
+      <div class="footer-copy">
+        © <span id="copyright-year"></span>
+        Stephen Sovocool ·
+        <span class="footer-site">MiddleSchoolHistory.com</span>
+        <br />
+        All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="nav.js"></script>
+  <script src="featured.js"></script>
+</body>
+</html>

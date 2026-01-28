@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base target="_top">
+<title>Timeline</title>
+  <style>
+
+    /* iframe embed safety: prevent iframe-level scrollbars */
+    html, body{
+      height:100%;
+      margin:0;
+      overflow:hidden; /* prevent iframe-level scrollbars */
+    }
+
+/* iframe-embed safety */
+:root{
+      /* ===== RED + GOLD THEME ===== */
+      --bg:#12060a;
+      --bg2:#0b0507;
+      --text:#fff6e5;
+      --muted:#ffdca6;
+      --subtle: rgba(255,246,229,.78);
+
+      --gold:#FFD84A;
+      --gold2:#f2c94c;
+      --red:#b3122a;
+      --red2:#7b0b1d;
+
+      --panel: rgba(255, 255, 255, .055);
+      --panel2: rgba(255, 255, 255, .032);
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 980px;
+
+      --focus: 0 0 0 4px rgba(255,216,74,.40);
+
+      --markerText: rgba(255,216,74,.95);
+      --brightYellow: var(--gold);
+
+      /* -----------------------------
+         TIMELINE GEOMETRY (EDIT HERE)
+         ----------------------------- */
+      --barsTop: 310px;
+      --barTopInBars: 11px;
+      --barH: 18px;
+
+      --avatar: 110px;
+      --gapToPortraitEdge: 120px;
+      --stackGap: 10px;
+      --metaH: 44px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(900px 700px at 0% 50%, rgba(179,18,42,.32), transparent 60%),
+        radial-gradient(900px 700px at 100% 50%, rgba(255,216,74,.18), transparent 60%),
+        linear-gradient(90deg, var(--bg2) 0%, var(--bg) 50%, var(--bg2) 100%);
+      background-attachment: fixed;
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .tiny{font-size:.92rem; color: rgba(255,246,229,.72)}
+
+    /* --------------------------- */
+    /* TIMELINE (STANDALONE)       */
+    /* --------------------------- */
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1rem 1rem 1.25rem;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.032));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem 1.1rem 1.1rem;
+    }
+
+    .timeline-head{
+      display:flex; align-items:center; justify-content:flex-end;
+      gap:1rem; flex-wrap:wrap; margin-bottom:.15rem;
+    }
+    .timeline-hint{
+      margin-right:auto;
+      font-weight:900;
+      font-size: 1.25rem;
+      letter-spacing:.15px;
+      color: #fff;
+      white-space: nowrap;
+      display:flex;
+      align-items:center;
+    }
+    .timeline-tip{
+      margin-top:.25rem;
+      margin-bottom:.5rem;
+      text-align:center;
+      font-size:1.0rem;
+      color: rgba(255,255,255,.75);
+      width:100%;
+    }
+    .timeline-controls{display:flex; gap:.55rem; flex-wrap:wrap; align-items:center}
+    .controlPill{
+      display:flex; align-items:center; gap:.5rem;
+      padding:.35rem .55rem;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .controlPill label{font-weight:1000; font-size:.9rem; color: rgba(255,246,229,.85); white-space:nowrap}
+    .controlPill input[type="range"]{width: 140px}
+    .controlPill select{
+      color: var(--text);
+      background: rgba(14,6,8,.35);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      padding: .35rem .6rem;
+      font-weight:900;
+      outline: none;
+    }
+    .controlPill select:focus{box-shadow:var(--focus)}
+
+    .timelineViewport{
+  border-radius: 16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(900px 260px at 20% 0%, rgba(179,18,42,.18), transparent 55%),
+    radial-gradient(900px 260px at 80% 20%, rgba(255,216,74,.10), transparent 55%),
+    rgba(14,6,8,.35);
+
+  /* scrolling still enabled */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* hide native scrollbars */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* old Edge */
+
+  height: 640px;
+}
+
+/* Chrome / Edge / Safari */
+.timelineViewport::-webkit-scrollbar{
+  display: none;
+}
+
+    .timelineCanvas{
+      position:relative;
+      height: 620px;
+      min-width: 900px;
+    }
+
+    .ticks{position:absolute; left:0; right:0; top: 18px; height: 55px; pointer-events:none}
+    .tick{position:absolute; top:0; width:1px; background: rgba(255,255,255,.18)}
+    .tick.small{height: 16px; top: 22px; opacity:.6}
+    .tick.big{height: 34px; top: 8px; opacity:.9}
+    .tickLabel{
+      position:absolute; top: 0;
+      transform: translateX(-50%);
+      color: rgba(255,246,229,.78);
+      font-weight:1000; font-size:.86rem;
+      white-space:nowrap;
+      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+    }
+
+    .marker{
+      position:absolute; top:0; bottom:0; width:0;
+      border-left: 2px dashed rgba(255,216,74,.55);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .timelineLine{
+      position:absolute;
+      left:0; right:0;
+      height:2px;
+      background: rgba(255,255,255,.14);
+      pointer-events:none;
+    }
+
+    .markerNote{
+      position:absolute;
+      top: 6px;
+      transform: translateX(-50%);
+      width: 260px;
+      text-align:center;
+      pointer-events:none;
+    }
+    .markerBubble{
+      display:inline-block;
+      padding:.22rem .62rem .3rem;
+      border-radius: 999px;
+      border:1px solid rgba(255,216,74,.40);
+      background: rgba(179,18,42,.12);
+      color: var(--markerText);
+      font-weight:1000;
+      letter-spacing:.2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+      line-height:1.1;
+    }
+    .markerBubble .t1{display:block; font-size:.92rem}
+    .markerBubble .t2{display:block; margin-top:.18rem; font-size:.86rem; opacity:.95}
+    .markerNote.row2{ top: 56px; }
+    .markerNote.row3{ top: 106px; }
+
+    .bars{position:absolute; left:0; right:0; top: var(--barsTop); height: 40px;}
+    .bar{
+      position:absolute; top: var(--barTopInBars); height: var(--barH);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .bar:hover{transform: translateY(-1px); filter: brightness(1.06)}
+    .bar:focus{outline:none; box-shadow: var(--focus)}
+
+    .emperor{
+      position:absolute;
+      transform: translateX(-50%);
+      width: 200px;
+      text-align:center;
+      cursor:pointer;
+      user-select:none;
+      text-decoration:none;
+    }
+    .emperor:focus{outline:none; box-shadow: var(--focus); border-radius: 14px}
+
+    .avatarWrap{
+      width: var(--avatar); height: var(--avatar);
+      margin: 0 auto;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 16px 34px rgba(0,0,0,.40);
+      display:grid; place-items:center;
+      position:relative;
+    }
+    .avatarWrap img{width:100%; height:100%; object-fit:cover; display:block}
+    .avatarWrap .ph{font-weight:1000; color: rgba(255,246,229,.82); padding:.5rem; font-size:.9rem;}
+
+    .meta{
+      min-height: var(--metaH);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      line-height:1.15;
+    }
+    .empName{font-weight:1000; letter-spacing:.2px}
+    .empYears{color: rgba(255,246,229,.78); font-weight:900; font-size:.92rem; margin-top:.18rem}
+
+    .stack{display:flex; flex-direction:column; align-items:center; gap: var(--stackGap);}
+
+    .eventCard .eventText{
+      margin-top:.1rem;
+      color: var(--markerText);
+      font-weight:1000;
+      line-height:1.12;
+      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+    }
+    .eventCard .eventText span{display:block}
+    .eventCard .avatarWrap{
+      border-color: rgba(255,216,74,.55);
+      box-shadow: 0 0 0 4px rgba(255,216,74,.14), 0 16px 34px rgba(0,0,0,.40);
+    }
+
+    .connector{
+      position:absolute;
+      width:0;
+      border-left: 2px solid rgba(255,255,255,.18);
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.45));
+      pointer-events:none;
+    }
+    .connector::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      transform: translateX(-50%);
+      width:8px; height:8px;
+      border-radius:999px;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.22);
+      top: 100%;
+      margin-top: -4px;
+    }
+    .connector.dotTop::after{
+      top: 0;
+      margin-top: -4px;
+    }
+
+    .scrubber{
+      margin-top:.75rem;
+      padding:.55rem .7rem;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      display:flex; align-items:center; gap:.8rem; flex-wrap:wrap;
+    }
+    .miniTrack{
+      position:relative;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      flex: 1 1 320px;
+      overflow:hidden;
+    }
+    .miniWindow{
+      position:absolute; top:0; bottom:0;
+      border-radius: 999px;
+      background: rgba(255,216,74,.28);
+      border: 1px solid rgba(255,216,74,.55);
+      cursor:grab;
+    }
+    .miniWindow:active{cursor:grabbing}
+
+    /* Lane placement classes used by the script */
+    .laneAbove{}
+    .laneBelow{}
+  
+
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <section class="card" aria-label="Timeline">
+      <div class="timeline-head">
+        <div class="timeline-hint">Scroll the Timeline</div>
+        <div class="timeline-controls">
+          <div class="controlPill" title="Zoom changes how many pixels each year takes">
+            <label for="zoom">Zoom</label>
+            <input id="zoom" type="range" min="3" max="10" step="1" value="7" />
+            <span class="tiny" id="zoomVal">7 px/yr</span>
+          </div>
+
+          <div class="controlPill" title="Jump the timeline to an emperor">
+            <label for="centerSelect">Center on:</label>
+            <select id="centerSelect" aria-label="Center timeline on an emperor"></select>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-tip">Tip: scroll sideways. Click a portrait, bar, or event to open its page.</div>
+
+      <div class="timelineViewport" id="viewport" tabindex="0" aria-label="Timeline viewport (scroll horizontally)">
+        <div class="timelineCanvas" id="canvas"></div>
+      </div>
+
+      <div class="scrubber" aria-label="Timeline mini map scrubber">
+        <div class="tiny" style="font-weight:900;">Mini-map</div>
+        <div class="miniTrack" id="miniTrack">
+          <div class="miniWindow" id="miniWindow" title="Drag to jump"></div>
+        </div>
+        <div class="tiny" id="yearReadout">Year: —</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+/* Red + gold alternating bars */
+    const timelineColors = ["#FFD84A","#B3122A","#F2C94C","#7B0B1D","#E9B949","#9E0F26"];
+
+    const range = { startYear: -60, endYear: 476 }; // 60 BCE → 476 CE
+
+    const emperors = [
+      { id:"augustus", name:"Augustus", startYear:-27, endYear:14, displayYears:"27 BCE–14 CE", colorIndex:0, image:"../images/augustus_timeline.jpg", page: "../emperors/augustus.html" },
+      { id:"tiberius", name:"Tiberius", startYear:14, endYear:37, displayYears:"14–37 CE", colorIndex:1, image:"../images/tiberius_timeline.jpg", page: "../emperors/tiberius.html" },
+      { id:"caligula", name:"Caligula", startYear:37, endYear:41, displayYears:"37–41 CE", colorIndex:2, image:"../images/caligula_timeline.jpg", page: "../emperors/caligula.html" },
+      { id:"claudius", name:"Claudius", startYear:41, endYear:54, displayYears:"41–54 CE", colorIndex:3, image:"../images/claudius_timeline.jpg", page: "../emperors/claudius.html" },
+      { id:"nero", name:"Nero", startYear:54, endYear:68, displayYears:"54–68 CE", colorIndex:4, image:"../images/nero_timeline.jpg", page: "../emperors/nero.html" },
+      { id:"trajan", name:"Trajan", startYear:98, endYear:117, displayYears:"98–117 CE", colorIndex:5, image:"../images/trajan_timeline.jpg", page: "../emperors/trajan.html" },
+      { id:"hadrian", name:"Hadrian", startYear:117, endYear:138, displayYears:"117–138 CE", colorIndex:0, image:"../images/hadrian_timeline.jpg", page: "../emperors/hadrian.html" },
+      { id:"marcus_aurelius", name:"Marcus Aurelius", startYear:161, endYear:180, displayYears:"161–180 CE", colorIndex:1, image:"../images/marcusaurelius_timeline.jpg", page: "../emperors/marcus-aurelius.html" },
+      { id:"commodus", name:"Commodus", startYear:180, endYear:192, displayYears:"180–192 CE", colorIndex:2, image:"../images/commodus_timeline.jpg", page: "../emperors/commodus.html" },
+
+      { id:"diocletian", name:"Diocletian", startYear:284, endYear:305, displayYears:"284–305 CE", colorIndex:2, image:"../images/diocletian_timeline.jpg", page: "../emperors/diocletian.html" },
+      { id:"constantine", name:"Constantine", startYear:306, endYear:337, displayYears:"306–337 CE", colorIndex:3, image:"../images/constantine_timeline.jpg", page: "../emperors/constantine.html" },
+      { id:"theodosius", name:"Theodosius I", startYear:379, endYear:395, displayYears:"379–395 CE", colorIndex:4, image:"../images/theodosiusi_timeline.jpg", page: "../emperors/theodosius.html" },
+      { id:"romulus_augustulus", name:"Romulus Augustulus", startYear:475, endYear:476, displayYears:"475–476 CE", colorIndex:5, image:"../images/romulusaugustulus_timeline.jpg", page: "../emperors/romulus-augustulus.html" }
+    ];
+
+    const specialEvents = [
+      {
+        type:"caesar",
+        id:"caesar_assassinated",
+        year:-44,
+        line1:"Julius Caesar",
+        line2:"assassinated",
+        line3:"44 BCE",
+        image:"../images/juliuscaesar_timeline.jpg",
+        page:"../index.html"
+      },
+      { type:"bubble", id:"empire_begins", year:-27, top:"27 BCE", bottom:"Empire Begins" },
+
+      /* ✅ ADDED */
+      { type:"bubble", id:"vesuvius_erupts", year:79, top:"79 CE", bottom:"Vesuvius Erupts" },
+
+      { type:"bubble", id:"west_falls", year:476, top:"476 CE", bottom:"Western Empire Falls" },
+      { type:"bubble", id:"byzantine_established", year:330, top:"330 CE", bottom:"Byzantine Empire Established" }
+    ];
+
+    const viewport = document.getElementById("viewport");
+    const canvas = document.getElementById("canvas");
+    const zoom = document.getElementById("zoom");
+    const zoomVal = document.getElementById("zoomVal");
+    const yearReadout = document.getElementById("yearReadout");
+    const miniTrack = document.getElementById("miniTrack");
+    const miniWindow = document.getElementById("miniWindow");
+    const centerSelect = document.getElementById("centerSelect");
+
+    let pxPerYear = parseInt(zoom.value, 10);
+
+    function clamp(n,a,b){ return Math.max(a, Math.min(b,n)); }
+
+    function formatYear(y){
+      if (y === 0) return "";
+      return (y < 0) ? `${Math.abs(y)} BCE` : `${y} CE`;
+    }
+
+    function isBigTick(y){
+      if (y === 0) return false;
+      return (y % 50 === 0);
+    }
+
+    function makeTickYears(){
+      const years = [];
+      for (let y = range.startYear; y <= range.endYear; y += 10){
+        if (y === 0) continue;
+        years.push(y);
+      }
+      return years;
+    }
+
+    function yearToX(year){
+      const adjusted = (year >= 1) ? (year - 1) : year; // skip year 0
+      return (adjusted - range.startYear) * pxPerYear;
+    }
+
+    function totalWidth(){
+      const totalYearsWithoutZero = (range.endYear - range.startYear) - 1;
+      return totalYearsWithoutZero * pxPerYear;
+    }
+
+    function clearCanvas(){ while (canvas.firstChild) canvas.removeChild(canvas.firstChild); }
+
+    function populateDropdown(){
+      const current = centerSelect.value;
+      centerSelect.innerHTML = "";
+      for (const e of emperors){
+        const opt = document.createElement("option");
+        opt.value = e.id;
+        opt.textContent = `${e.name} (${e.displayYears})`;
+        centerSelect.appendChild(opt);
+      }
+      centerSelect.value = current || "augustus";
+    }
+
+    function centerOnEmperor(id){
+      const e = emperors.find(x => x.id === id);
+      if (!e) return;
+
+      const left = yearToX(e.startYear);
+      const right = yearToX(e.endYear);
+      const w = Math.max(6, right - left);
+      const centerX = left + (w / 2);
+
+      viewport.scrollLeft = clamp(centerX - (viewport.clientWidth / 2), 0, viewport.scrollWidth);
+      syncMiniWindow();
+    }
+
+    function getBarCenterY(){
+      const cs = getComputedStyle(document.documentElement);
+      const barsTop = parseFloat(cs.getPropertyValue("--barsTop"));
+      const barTopInBars = parseFloat(cs.getPropertyValue("--barTopInBars"));
+      const barH = parseFloat(cs.getPropertyValue("--barH"));
+      return barsTop + barTopInBars + (barH/2);
+    }
+
+    function render(){
+      clearCanvas();
+      zoomVal.textContent = `${pxPerYear} px/yr`;
+      canvas.style.width = totalWidth() + "px";
+
+      const ticks = document.createElement("div");
+      ticks.className = "ticks";
+      canvas.appendChild(ticks);
+
+      for (const y of makeTickYears()){
+        const x = yearToX(y);
+
+        const t = document.createElement("div");
+        t.className = "tick " + (isBigTick(y) ? "big" : "small");
+        t.style.left = x + "px";
+        ticks.appendChild(t);
+
+        if (isBigTick(y)){
+          const lbl = document.createElement("div");
+          lbl.className = "tickLabel";
+          lbl.style.left = x + "px";
+          lbl.textContent = formatYear(y);
+          ticks.appendChild(lbl);
+        }
+      }
+
+      const bars = document.createElement("div");
+      bars.className = "bars";
+      canvas.appendChild(bars);
+
+      const line = document.createElement("div");
+      line.className = "timelineLine";
+      line.style.top = (getBarCenterY()) + "px";
+      canvas.appendChild(line);
+
+      for (const s of specialEvents){
+        const x = yearToX(s.year);
+        const m = document.createElement("div");
+        m.className = "marker";
+        m.style.left = x + "px";
+        canvas.appendChild(m);
+      }
+
+      const bubbles = specialEvents.filter(s => s.type === "bubble")
+        .map(s => ({...s, x: yearToX(s.year)}))
+        .sort((a,b) => a.x - b.x);
+
+      const rows = [[], [], []];
+      for (const b of bubbles){
+        let placedRow = 0;
+        for (let r = 0; r < rows.length; r++){
+          const last = rows[r][rows[r].length - 1];
+          if (!last || Math.abs(b.x - last.x) > 230){
+            placedRow = r;
+            rows[r].push(b);
+            break;
+          }
+          placedRow = r;
+        }
+
+        const note = document.createElement("div");
+        note.className = "markerNote " + (placedRow === 1 ? "row2" : placedRow === 2 ? "row3" : "");
+        note.style.left = b.x + "px";
+
+        const bubble = document.createElement("div");
+        bubble.className = "markerBubble";
+        bubble.innerHTML = `<span class="t1">${b.top}</span><span class="t2">${b.bottom}</span>`;
+
+        note.appendChild(bubble);
+        canvas.appendChild(note);
+      }
+
+      const caesar = specialEvents.find(s => s.type === "caesar");
+      if (caesar){
+        const x = yearToX(caesar.year);
+
+        const card = document.createElement("a");
+        card.className = "emperor laneAbove eventCard";
+        card.href = caesar.page;
+        card.target = "_top";
+        card.style.left = x + "px";
+        card.title = "Julius Caesar assassinated (44 BCE)";
+        card.setAttribute("aria-label", "Open event page: Julius Caesar assassinated 44 BCE");
+
+        const stack = document.createElement("div");
+        stack.className = "stack";
+
+        const avatarWrap = document.createElement("div");
+        avatarWrap.className = "avatarWrap";
+
+        const img = document.createElement("img");
+        img.alt = "Julius Caesar (timeline portrait)";
+        img.src = caesar.image;
+        img.onerror = () => { avatarWrap.innerHTML = `<div class="ph">Image<br/>Missing</div>`; };
+        avatarWrap.appendChild(img);
+
+        const text = document.createElement("div");
+        text.className = "eventText";
+        text.innerHTML = `
+          <span>${caesar.line1}</span>
+          <span>${caesar.line2}</span>
+          <span>${caesar.line3}</span>
+        `;
+
+        const connector = document.createElement("div");
+        connector.className = "connector";
+
+        stack.appendChild(avatarWrap);
+        stack.appendChild(text);
+        card.appendChild(stack);
+        card.appendChild(connector);
+        canvas.appendChild(card);
+      }
+
+      emperors.forEach((e, idx) => {
+        const left = yearToX(e.startYear);
+        const right = yearToX(e.endYear);
+        const w = Math.max(6, right - left);
+        const cx = left + (w/2);
+
+        const bar = document.createElement("a");
+        bar.className = "bar";
+        bar.href = e.page;
+        bar.target = "_top";
+        bar.style.left = left + "px";
+        bar.style.width = w + "px";
+        bar.style.background = timelineColors[e.colorIndex % timelineColors.length];
+        bar.title = `${e.name} (${e.displayYears})`;
+        bar.setAttribute("aria-label", `Open page for ${e.name}`);
+        bars.appendChild(bar);
+
+        const laneClass = (idx % 2 === 0) ? "laneAbove" : "laneBelow";
+
+        const emp = document.createElement("a");
+        emp.className = `emperor ${laneClass}`;
+        emp.href = e.page;
+        emp.target = "_top";
+        emp.style.left = cx + "px";
+        emp.title = `Open page for ${e.name}`;
+        emp.setAttribute("aria-label", `Open page for ${e.name}`);
+
+        const stack = document.createElement("div");
+        stack.className = "stack";
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+
+        const nm = document.createElement("div");
+        nm.className = "empName";
+        nm.textContent = e.name;
+
+        const yrs = document.createElement("div");
+        yrs.className = "empYears";
+        yrs.textContent = `(${e.displayYears})`;
+
+        meta.appendChild(nm);
+        meta.appendChild(yrs);
+
+        const avatarWrap = document.createElement("div");
+        avatarWrap.className = "avatarWrap";
+
+        const img = document.createElement("img");
+        img.alt = `Portrait of ${e.name} (timeline portrait)`;
+        img.src = e.image;
+        img.onerror = () => { avatarWrap.innerHTML = `<div class="ph">Image<br/>Missing</div>`; };
+        avatarWrap.appendChild(img);
+
+        if (laneClass === "laneAbove"){
+          stack.appendChild(avatarWrap);
+          stack.appendChild(meta);
+        } else {
+          stack.appendChild(meta);
+          stack.appendChild(avatarWrap);
+        }
+
+        const connector = document.createElement("div");
+        connector.className = "connector";
+
+        emp.appendChild(stack);
+        emp.appendChild(connector);
+        canvas.appendChild(emp);
+
+        if (e.id === "augustus"){
+          bar.style.boxShadow = "0 0 0 4px rgba(255,216,74,.20), 0 14px 30px rgba(0,0,0,.45)";
+          bar.style.borderColor = "rgba(255,216,74,.55)";
+          avatarWrap.style.boxShadow = "0 0 0 4px rgba(255,216,74,.14), 0 16px 34px rgba(0,0,0,.45)";
+          nm.style.textDecoration = "underline";
+        }
+      });
+
+      requestAnimationFrame(() => {
+        positionLanesSymmetrically();
+        adjustConnectors();
+        syncMiniWindow();
+      });
+    }
+
+    function positionLanesSymmetrically(){
+      const cs = getComputedStyle(document.documentElement);
+      const gap = parseFloat(cs.getPropertyValue("--gapToPortraitEdge"));
+      const avatarH = parseFloat(cs.getPropertyValue("--avatar"));
+      const barCenterY = getBarCenterY();
+
+      const sampleAbove = canvas.querySelector(".emperor.laneAbove .avatarWrap");
+      const sampleBelow = canvas.querySelector(".emperor.laneBelow .avatarWrap");
+
+      let aboveAvatarOffsetTop = 0;
+      let belowAvatarOffsetTop = 0;
+
+      if (sampleAbove) aboveAvatarOffsetTop = sampleAbove.offsetTop;
+      if (sampleBelow) belowAvatarOffsetTop = sampleBelow.offsetTop;
+
+      const aboveLaneTop = (barCenterY - gap) - (aboveAvatarOffsetTop + avatarH);
+      const belowLaneTop = (barCenterY + gap) - (belowAvatarOffsetTop);
+
+      canvas.querySelectorAll(".emperor.laneAbove").forEach(el => el.style.top = aboveLaneTop + "px");
+      canvas.querySelectorAll(".emperor.laneBelow").forEach(el => el.style.top = belowLaneTop + "px");
+    }
+
+    function adjustConnectors(){
+      const barCenterY = getBarCenterY();
+      const cards = canvas.querySelectorAll(".emperor");
+
+      cards.forEach(card => {
+        const avatar = card.querySelector(".avatarWrap");
+        const connector = card.querySelector(".connector");
+        if (!avatar || !connector) return;
+
+        const cardTop = card.offsetTop;
+        const avatarTop = cardTop + avatar.offsetTop;
+        const avatarBottom = avatarTop + avatar.offsetHeight;
+
+        const isAbove = card.classList.contains("laneAbove");
+        const portraitEdgeY = isAbove ? avatarBottom : avatarTop;
+
+        const minY = Math.min(portraitEdgeY, barCenterY);
+        const maxY = Math.max(portraitEdgeY, barCenterY);
+        const height = Math.max(0, maxY - minY);
+
+        connector.style.left = "50%";
+        connector.style.top = (minY - cardTop) + "px";
+        connector.style.height = height + "px";
+
+        connector.classList.toggle("dotTop", barCenterY === minY);
+      });
+
+      const line = canvas.querySelector(".timelineLine");
+      if (line) line.style.top = barCenterY + "px";
+    }
+
+    viewport.addEventListener("wheel", (e) => {
+      if (viewport.scrollWidth > viewport.clientWidth){
+        e.preventDefault();
+        viewport.scrollLeft += (e.deltaY + e.deltaX);
+        syncMiniWindow();
+      }
+    }, { passive:false });
+
+    viewport.addEventListener("mousemove", (e) => {
+      const rect = viewport.getBoundingClientRect();
+      const xInViewport = e.clientX - rect.left;
+      const xOnCanvas = viewport.scrollLeft + xInViewport;
+
+      const adjustedYear = Math.round((xOnCanvas / pxPerYear) + range.startYear);
+      let realYear = adjustedYear;
+      if (adjustedYear >= 0) realYear = adjustedYear + 1;
+
+      yearReadout.textContent = `Year: ${formatYear(realYear) || "—"}`;
+    });
+    viewport.addEventListener("mouseleave", () => { yearReadout.textContent = "Year: —"; });
+
+    zoom.addEventListener("input", () => {
+      const oldPx = pxPerYear;
+      const newPx = parseInt(zoom.value, 10);
+
+      const centerCanvasX = viewport.scrollLeft + (viewport.clientWidth/2);
+      const centerAdjusted = (centerCanvasX / oldPx) + range.startYear;
+
+      pxPerYear = newPx;
+      render();
+
+      const newCenterCanvasX = (centerAdjusted - range.startYear) * pxPerYear;
+      viewport.scrollLeft = clamp(newCenterCanvasX - (viewport.clientWidth/2), 0, viewport.scrollWidth);
+
+      syncMiniWindow();
+      requestAnimationFrame(adjustConnectors);
+    });
+
+    centerSelect.addEventListener("change", () => centerOnEmperor(centerSelect.value));
+
+    function syncMiniWindow(){
+      const total = viewport.scrollWidth;
+      const view = viewport.clientWidth;
+      if (!total || total <= 0) return;
+
+      const trackW = miniTrack.clientWidth;
+      const ratio = trackW / total;
+
+      const winW = Math.max(28, view * ratio);
+      const winL = viewport.scrollLeft * ratio;
+
+      miniWindow.style.width = winW + "px";
+      miniWindow.style.left = winL + "px";
+    }
+
+    let dragging = false;
+    let dragOffset = 0;
+
+    miniWindow.addEventListener("mousedown", (e) => {
+      dragging = true;
+      dragOffset = e.clientX - miniWindow.getBoundingClientRect().left;
+      e.preventDefault();
+    });
+    window.addEventListener("mouseup", () => dragging = false);
+    window.addEventListener("mousemove", (e) => {
+      if (!dragging) return;
+
+      const trackRect = miniTrack.getBoundingClientRect();
+      const trackW = trackRect.width;
+      const total = viewport.scrollWidth;
+      const view = viewport.clientWidth;
+
+      const ratio = trackW / total;
+      const winW = Math.max(28, view * ratio);
+
+      let newLeft = (e.clientX - trackRect.left) - dragOffset;
+      newLeft = clamp(newLeft, 0, trackW - winW);
+
+      miniWindow.style.left = newLeft + "px";
+      viewport.scrollLeft = newLeft / ratio;
+
+      syncMiniWindow();
+    });
+
+    miniTrack.addEventListener("mousedown", (e) => {
+      if (e.target === miniWindow) return;
+
+      const trackRect = miniTrack.getBoundingClientRect();
+      const clickX = e.clientX - trackRect.left;
+
+      const total = viewport.scrollWidth;
+      const view = viewport.clientWidth;
+      const trackW = trackRect.width;
+      const ratio = trackW / total;
+
+      const winW = Math.max(28, view * ratio);
+      const targetLeft = clamp(clickX - winW/2, 0, trackW - winW);
+
+      viewport.scrollLeft = targetLeft / ratio;
+      syncMiniWindow();
+    });
+
+    window.addEventListener("resize", () => {
+      syncMiniWindow();
+      requestAnimationFrame(() => { positionLanesSymmetrically(); adjustConnectors(); });
+    });
+
+    populateDropdown();
+    render();
+
+    requestAnimationFrame(() => {
+      centerSelect.value = "augustus";
+      centerOnEmperor("augustus");
+      adjustConnectors();
+    });
+  </script>
+</body>
+</html>

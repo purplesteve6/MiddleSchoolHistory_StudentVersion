@@ -1,0 +1,630 @@
+/* =========================================================
+   The Enlightenment (Grade 7) — White + Gold Theme
+   Landing Page Stylesheet
+   IMPORTANT: Header styles below match the SITEWIDE header.html
+   selectors exactly (header, .nav, .nav-logo, .brandText, .btn).
+   ========================================================= */
+
+:root{
+  /* ===== WHITE + GOLD THEME ===== */
+  --bg: #ffffff;
+  --bg2:#fbf7ea;                 /* warm ivory */
+  --text:#1f1a12;                /* ink */
+  --subtle: rgba(31,26,18,.78);
+
+  --gold:#D4AF37;                /* classic gold */
+  --gold2:#F2D77A;               /* soft highlight gold */
+  --ink:#1f1a12;
+
+  --panel: rgba(31,26,18,.04);
+  --panel2: rgba(31,26,18,.02);
+  --shadow: 0 14px 40px rgba(31,26,18,.14);
+  --radius: 18px;
+  --max: 980px;
+
+  --focus: 0 0 0 4px rgba(212,175,55,.28);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color: var(--text);
+  line-height: 1.5;
+
+  background:
+    radial-gradient(900px 700px at 0% 45%, rgba(212,175,55,.14), transparent 60%),
+    radial-gradient(900px 700px at 100% 55%, rgba(212,175,55,.10), transparent 62%),
+    linear-gradient(180deg, var(--bg2), var(--bg) 55%, var(--bg2));
+  background-attachment: fixed;
+}
+
+a{color:inherit}
+img{max-width:100%; display:block}
+.u{ text-decoration: underline; text-underline-offset: 3px; }
+
+/* =========================================================
+   HEADER — EXACT SAME SELECTORS AS SITEWIDE header.html
+   (Repo controls look via this CSS.)
+   ========================================================= */
+
+header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:10;
+  overflow:visible;                 /* critical so logo can overlap */
+  backdrop-filter: blur(12px);
+
+  /* White + gold */
+  background: rgba(255,255,255,.86);
+  border-bottom: 1px solid rgba(212,175,55,.35);
+}
+
+/* Logo patch overlap (matches topic templates) */
+.nav-logo{
+  position:absolute;
+  left:12px;
+  top:15px;
+  z-index:999;
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.nav-logo-img{
+  width:auto;
+  max-width:none;
+  display:block;
+  background:transparent;
+  padding:0;
+  border-radius:0;
+  box-shadow:none;
+  height:140px;
+}
+
+/* Centered header content */
+.nav{
+  max-width: var(--max);
+  margin:0 auto;
+  padding: .8rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.8rem;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+
+.brandText{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+}
+
+.brandKicker{
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: rgba(31,26,18,.72);
+}
+
+.brandTitle{
+  font-weight:1000;
+  color: rgba(31,26,18,.95);
+}
+
+.brandSub{
+  font-size:.9rem;
+  font-weight:600;
+  color: rgba(31,26,18,.70);
+  margin-top:.08rem;
+}
+
+/* Grade badge tile */
+.columnIcon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+
+  border:1px solid rgba(212,175,55,.38);
+  background: linear-gradient(135deg, rgba(212,175,55,.30), rgba(255,255,255,.55));
+  box-shadow: 0 10px 22px rgba(31,26,18,.14);
+  flex:0 0 auto;
+}
+
+.columnIcon img{
+  width:70%;
+  height:70%;
+  object-fit:contain;
+  display:block;
+}
+
+/* Header button */
+.nav a.btn{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.55rem .85rem;
+  border-radius: 999px;
+
+  border:1px solid rgba(31,26,18,.14);
+  background: rgba(255,255,255,.75);
+  color: rgba(31,26,18,.92);
+
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+  white-space:nowrap;
+}
+
+.nav a.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.95);
+  border-color: rgba(212,175,55,.60);
+}
+
+.nav a.btn:focus{
+  outline:none;
+  box-shadow: var(--focus);
+}
+
+@media (max-width: 720px){
+  .nav-logo-img{ height:110px; }
+}
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+main{
+  max-width: var(--max);
+  margin:0 auto;
+  padding: 110px 1rem 4rem; /* matches the topic template pattern */
+}
+
+.card{
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  border:1px solid rgba(31,26,18,.10);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.tiny{font-size:.92rem; color: rgba(31,26,18,.68)}
+h2{margin:.15rem 0 .6rem; font-size:1.25rem; letter-spacing:-.2px}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:1.1rem;
+  align-items:stretch;
+  margin-top:1rem;
+}
+@media (max-width: 860px){ .hero{grid-template-columns:1fr} }
+
+.hero-left{padding:1.2rem 1.2rem 1.1rem}
+
+.kicker{
+  display:inline-flex;
+  gap:.5rem;
+  align-items:center;
+  padding:.25rem .6rem;
+  border-radius: 999px;
+  background: rgba(212,175,55,.14);
+  border: 1px solid rgba(212,175,55,.38);
+  color: rgba(31,26,18,.92);
+  font-weight:1000;
+  font-size:.92rem;
+}
+
+h1{
+  margin:.65rem 0 .35rem;
+  font-size: clamp(2.05rem, 3.8vw, 3.0rem);
+  line-height:1.1;
+  letter-spacing:-.6px;
+}
+
+.sub{
+  margin:0 0 .9rem;
+  color: var(--subtle);
+  font-size:1.04rem;
+  max-width: 65ch;
+}
+
+.callout{
+  padding:.75rem .85rem;
+  border-radius: 14px;
+  background: rgba(212,175,55,.10);
+  border: 1px solid rgba(212,175,55,.30);
+  color: rgba(31,26,18,.92);
+  font-weight:750;
+}
+.callout .label{font-weight:1000}
+.callout .value{font-weight:800}
+
+/* Big Idea */
+.bigIdeaWrap{margin-top:.8rem}
+.bigIdeaGraphic{
+  width:150px;
+  height:92px;
+  margin: .2rem auto .35rem;
+  background:none;
+  border:none;
+  padding:0;
+  min-height:0;
+  display:block;
+}
+.bigIdeaGraphic img{
+  width:150px;
+  height:92px;
+  display:block;
+  object-fit:contain;
+}
+.bigIdeaText{
+  margin-top:.1rem;
+  color: rgba(31,26,18,.92);
+  font-weight:1000;
+}
+
+/* Tags row */
+.pillrow{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.95rem}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.33rem .62rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(31,26,18,.10);
+  font-weight:900;
+  font-size:.92rem;
+}
+
+/* Right card */
+.hero-right{
+  padding: 1rem;
+  display: grid;
+  gap: .55rem;
+}
+.portraitWrap{display:grid; gap:.55rem}
+
+.portrait{
+  aspect-ratio: 2 / 3;
+  width:100%;
+  border-radius: calc(var(--radius) - 4px);
+  overflow:hidden;
+  border:1px solid rgba(31,26,18,.10);
+  background:
+    radial-gradient(700px 320px at 18% 0%, rgba(212,175,55,.12), transparent 55%),
+    radial-gradient(700px 320px at 86% 20%, rgba(212,175,55,.10), transparent 55%),
+    linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
+  display:grid;
+  place-items:center;
+}
+.portrait img{ width:100%; height:100%; object-fit:cover; }
+
+.portraitButtons{
+  display:flex;
+  justify-content:space-between;
+  align-items:stretch;
+  gap:.5rem;
+  margin-top:.45rem;
+}
+
+.pbtn{
+  width: calc((100% - 1rem) / 3);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.22rem;
+  padding:.48rem .55rem .52rem;
+  height: 56px;
+  border-radius: 12px;
+  border:1px solid rgba(31,26,18,.12);
+  background: rgba(255,255,255,.75);
+  font-size:.82rem;
+  font-weight:1000;
+  text-decoration:none;
+  line-height:1.15;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.pbtn:hover{
+  background: rgba(255,255,255,.95);
+  transform: translateY(-1px);
+  border-color: rgba(212,175,55,.55);
+}
+.pbtn:focus{outline:none; box-shadow: var(--focus)}
+
+.pbtnTop{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  width:100%;
+  text-align:center;
+  font-weight:1000;
+}
+.pbtnTop .label{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pbtnSub{
+  font-size:.78rem;
+  font-weight:900;
+  color: rgba(31,26,18,.55);
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+.pbtn.spacer,
+.pbtn.is-hidden{
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.jumpRow{
+  display:flex;
+  justify-content:center;
+  margin-top:.35rem;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.full{margin-top: 1rem}
+.section{padding:1.1rem 1.2rem}
+.section h3{margin: .95rem 0 .4rem}
+.section p{margin:.5rem 0; color: rgba(31,26,18,.86)}
+
+/* Two-column grid */
+.grid2{
+  margin-top:1rem;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:1rem;
+}
+@media (max-width: 860px){ .grid2{grid-template-columns:1fr} }
+
+/* Did you know feature */
+.didYouKnow{
+  margin-top: 1rem;
+  padding: 1.1rem 1.1rem 1.15rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(212,175,55,.40);
+  background: linear-gradient(135deg, rgba(212,175,55,.24), rgba(212,175,55,.10));
+  box-shadow: 0 16px 44px rgba(31,26,18,.14);
+  text-align:center;
+  display:block;
+}
+.didYouKnow .dykImg{
+  width: 200px;
+  height: 78px;
+  margin: 0 auto .45rem;
+  background:none;
+  border:none;
+  padding:0;
+  display:block;
+}
+.didYouKnow .dykImg img{
+  width:200px;
+  height:78px;
+  display:block;
+  object-fit:contain;
+}
+.didYouKnow .fact{
+  color: rgba(31,26,18,.92);
+  font-weight:1000;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height:1.25;
+  text-shadow: 0 2px 16px rgba(255,255,255,.45);
+}
+
+/* Quick facts */
+.factsList{display:grid; gap:.55rem}
+.factItem{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(31,26,18,.10);
+  border-radius: 14px;
+  padding:.55rem .7rem;
+  color: rgba(31,26,18,.88);
+}
+
+/* Vocabulary lists */
+.vocab{display:grid; gap:.55rem}
+.term{
+  background: rgba(212,175,55,.10);
+  border: 1px solid rgba(212,175,55,.24);
+  border-radius: 14px;
+  padding:.55rem .7rem;
+  color: rgba(31,26,18,.90);
+}
+
+/* Hover definitions */
+.vocabWord{
+  position:relative;
+  font-weight:900;
+  color: rgba(143,108,22,1);
+  cursor: help;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+.vocabWord::after{
+  content: attr(data-def);
+  position:absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  width: min(330px, 70vw);
+  background: rgba(31,26,18,.92);
+  border: 1px solid rgba(212,175,55,.55);
+  border-radius: 12px;
+  padding: .65rem .75rem;
+  color: rgba(255,255,255,.96);
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 0 14px 30px rgba(31,26,18,.25);
+  opacity:0;
+  transform: translateY(4px);
+  pointer-events:none;
+  transition: opacity .12s ease, transform .12s ease;
+  z-index: 5;
+}
+.vocabWord:hover::after{opacity:1; transform: translateY(0)}
+.vocabWord::before{
+  content:"";
+  position:absolute;
+  left: 18px;
+  bottom: calc(100% + 3px);
+  border-width: 7px 7px 0 7px;
+  border-style: solid;
+  border-color: rgba(31,26,18,.92) transparent transparent transparent;
+  opacity:0;
+  transition: opacity .12s ease;
+  z-index: 6;
+}
+.vocabWord:hover::before{opacity:1}
+
+/* Media row (image + text) */
+.mediaRow{
+  margin-top:.7rem;
+  display:grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 1rem;
+  align-items:start;
+}
+@media (max-width: 860px){ .mediaRow{grid-template-columns:1fr} }
+
+.mediaImg{
+  border-radius: 16px;
+  overflow:hidden;
+  border: 1px solid rgba(31,26,18,.10);
+  background: rgba(255,255,255,.6);
+}
+.mediaImg img{ width:100%; height:100%; object-fit:cover; display:block; }
+.mediaText .bullets{ margin:.6rem 0 0; padding-left: 1.1rem; }
+.mediaText .bullets li{ margin:.35rem 0; }
+
+/* =========================================================
+   Scrollable “Art Gallery”
+   ========================================================= */
+
+.gallery{
+  margin-top: .85rem;
+  display:flex;
+  gap: .85rem;
+  overflow-x:auto;
+  padding: .35rem .2rem .75rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery::-webkit-scrollbar{height: 10px}
+.gallery::-webkit-scrollbar-thumb{
+  background: rgba(212,175,55,.45);
+  border-radius: 999px;
+}
+.galleryCard{
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: min(220px, 70vw);
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(31,26,18,.10);
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 10px 24px rgba(31,26,18,.12);
+  transition: transform .12s ease, border-color .12s ease;
+  text-decoration:none;
+  position:relative;
+}
+.galleryCard:hover{
+  transform: translateY(-2px);
+  border-color: rgba(212,175,55,.65);
+}
+.galleryCard img{
+  width:100%;
+  height: 260px;
+  object-fit: cover;
+  display:block;
+}
+.cap{
+  padding: .55rem .7rem .65rem;
+  display:grid;
+  gap:.15rem;
+}
+.cap .name{
+  font-weight: 1000;
+  letter-spacing: -.2px;
+}
+.cap .tag{
+  font-weight: 900;
+  color: rgba(31,26,18,.66);
+  font-size: .9rem;
+}
+
+/* Anchor offset for fixed header */
+#connections, #thinkers{ scroll-margin-top: 140px; }
+
+/* =========================================================
+   Footer (if your footer partial uses these classes)
+   ========================================================= */
+
+.site-footer{
+  margin-top:0;
+  padding:18px 1rem 40px;
+  color: rgba(31,26,18,.70);
+}
+.footer-rule{
+  border:none;
+  height:1px;
+  margin: 0 auto 16px;
+  max-width: var(--max);
+  background: linear-gradient(90deg, transparent, rgba(31,26,18,.25), transparent);
+}
+.footer-inner{
+  max-width: var(--max);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap: 16px;
+  flex-wrap:wrap;
+}
+.footer-brand{display:flex; align-items:center; gap: 10px;}
+.footer-logo-icon{height:40px; width:auto; display:block}
+.footer-logo-text{height:22px; width:auto; display:block; opacity:.9}
+.footer-copy{font-size:13px; line-height:1.4}
+.footer-site{font-weight: 900}
+@media (max-width: 640px){
+  .footer-inner{flex-direction:column; align-items:flex-start; gap:12px}
+  .footer-logo-icon{height:36px}
+  .footer-logo-text{height:20px}
+}
+
+/* === Enlightenment Thinker Gallery: image-only portraits === */
+#thinkers .galleryCard {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+#thinkers .galleryCard img {
+  display: block;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
