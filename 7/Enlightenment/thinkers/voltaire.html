@@ -6,13 +6,15 @@
   <title>Voltaire | The Enlightenment</title>
   <meta name="description" content="Voltaire: Enlightenment writer who argued for freedom of speech and separation of church and state." />
 
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="../enlightenment.css" />
+  <base href="/MiddleSchoolHistory_StudentVersion/">
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="7/Enlightenment/enlightenment.css" />
 
   <style>
     @font-face{
       font-family: "ChalkFont";
-      src: url("/assets/fonts/chalkfont-regular.woff2") format("woff2");
+      src: url("assets/fonts/chalkfont-regular.woff2") format("woff2");
       font-weight: 400;
       font-style: normal;
       font-display: swap;
@@ -22,7 +24,7 @@
     .rememberChalk{
       background:
         linear-gradient(0deg, rgba(0,0,0,.40), rgba(0,0,0,.40)),
-        url("/assets/images/backgrounds/chalk.webp");
+        url("assets/images/backgrounds/chalk.webp");
       background-size: cover;
       background-position: center;
       border: 1px solid rgba(212,175,55,.35);
@@ -68,17 +70,16 @@
       font-size: clamp(1.05rem, 2vw, 1.35rem);
       font-weight: 800;
       margin-bottom: .55rem;
-      color: rgba(242,215,122,.98); /* all yellow */
+      color: rgba(242,215,122,.98);
     }
 
-    /* ===== Thinkers Grid (no scroll, transparent, no labels/boxes) ===== */
+    /* ===== Thinkers Grid ===== */
     .thinkerGrid{
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 18px;
       margin-top: 18px;
       align-items: center;
-
       max-width: 1100px;
       margin-left: auto;
       margin-right: auto;
@@ -125,12 +126,7 @@
 
         <div class="bigIdeaWrap" aria-label="Big Idea">
           <div class="bigIdeaGraphic">
-            <img
-              src="/assets/images/ui/bigidea.png"
-              alt="Big Idea graphic"
-              width="150"
-              height="92"
-            />
+            <img src="assets/images/ui/bigidea.png" alt="Big Idea graphic" width="150" height="92" />
           </div>
           <div class="bigIdeaText">
             Voltaire believed a democracy needs freedom of speech and a separation of <b>church and state</b>.
@@ -157,12 +153,11 @@
       <aside class="card hero-right" aria-label="Portrait and navigation">
         <div class="portraitWrap">
           <div class="portrait" role="img" aria-label="Portrait of Voltaire">
-            <img src="../images/voltaire.webp" alt="Voltaire" />
+            <img src="7/Enlightenment/images/voltaire.webp" alt="Voltaire" />
           </div>
 
           <div class="portraitButtons" aria-label="Navigation">
-            <!-- Back to Rousseau (per your instruction) -->
-            <a class="pbtn prev" href="rousseau.html" title="Back: Rousseau">
+            <a class="pbtn prev" href="7/Enlightenment/thinkers/rousseau.html" title="Back: Rousseau">
               <div class="pbtnTop">
                 <span class="emoji" aria-hidden="true">⬅️</span>
                 <span class="label">Back</span>
@@ -172,8 +167,7 @@
 
             <div class="pbtn spacer" aria-hidden="true"></div>
 
-            <!-- Next to Hobbes (per your instruction) -->
-            <a class="pbtn next" href="hobbes.html" title="Next: Hobbes">
+            <a class="pbtn next" href="7/Enlightenment/thinkers/hobbes.html" title="Next: Hobbes">
               <div class="pbtnTop">
                 <span class="label">Next</span>
                 <span class="emoji" aria-hidden="true">➡️</span>
@@ -217,31 +211,23 @@
         <p>
           Voltaire believed separation of church and state was essential for a functioning democracy for two major reasons.
           First, he asked: how could people live peacefully if they were subjected to the rules of a faith they did not follow?
-          When government is tied to religion, it can create unfair laws that punish people simply for believing something different.
         </p>
 
         <p>
           Second, Voltaire argued that no separation of church and state means no true
           <span class="vocabWord" data-def="The right to express opinions without punishment, as long as it is peaceful and lawful.">freedom of speech</span>.
-          He wondered: how could a person criticize the government if, at the same time, they feared angering God and being punished in the afterlife?
-          When religion and government are tightly connected, criticizing leaders can feel like criticizing a religion—and people may stay silent out of fear.
-        </p>
-
-        <p>
-          Voltaire believed people should be able to speak their minds peacefully, even when others disagree.
-          He argued that real freedom depends on protecting speech—especially unpopular speech.
+          When religion and government are tightly connected, criticizing leaders can feel like criticizing a religion.
         </p>
       </div>
     </section>
 
-    <!-- DID YOU KNOW (unique and interesting) -->
+    <!-- DID YOU KNOW -->
     <section class="didYouKnow" aria-label="Did you know feature">
-      <div class="dykImg" aria-label="Did you know banner">
-        <img src="/assets/images/ui/didyouknow.png" alt="Did you know" width="200" height="78" />
+      <div class="dykImg">
+        <img src="assets/images/ui/didyouknow.png" alt="Did you know" width="200" height="78" />
       </div>
       <div class="fact">
-        Voltaire’s writings got him in serious trouble—he was arrested and even forced to leave France at times because his ideas challenged powerful leaders
-        and the way religion was used in government.
+        Voltaire’s writings got him arrested and even forced into exile because his ideas challenged powerful leaders.
       </div>
     </section>
 
@@ -251,38 +237,34 @@
         <h2>Connection to the United States</h2>
 
         <p>
-          Today, separation of church and state is a hallmark of American society. It is protected by the
+          Separation of church and state is protected by the
           <span class="vocabWord" data-def="The first amendment protects freedoms like speech and religion.">First Amendment</span>
-          to the U.S. Constitution, which prevents the government from establishing an official religion and protects religious freedom.
+          to the U.S. Constitution.
         </p>
 
         <p>
-          For example, public institutions (institutions that receive taxpayer money) cannot favor one religion over another.
-          This is why there is no required prayer in public schools, why courts cannot display religious laws as official government rules,
-          and why a president is not required to be of a certain faith.
+          Public institutions cannot favor one religion over another, which is why public schools cannot require prayer
+          and why presidents are not required to follow a specific faith.
         </p>
       </div>
     </section>
 
-    <!-- TO HELP YOU REMEMBER (chalkboard) -->
+    <!-- TO HELP YOU REMEMBER -->
     <section class="didYouKnow rememberChalk" aria-label="To Help You Remember feature">
-      <div class="dykImg" aria-label="To Help You Remember banner">
-        <img src="/assets/images/ui/helpremember.png" alt="To Help You Remember" />
+      <div class="dykImg">
+        <img src="assets/images/ui/helpremember.png" alt="To Help You Remember" />
       </div>
 
       <div class="fact">
         <div class="lineBig">
           <span class="gold">V</span>oltaire = <span class="gold">V</span>oice
         </div>
-
         <div class="lineSmall">
           Democracy needs people to speak up…
         </div>
-
         <div class="lineBig">
           <span class="gold">V</span>oice needs <span style="color:rgba(242,215,122,.98); font-weight:900;">Freedom of Speech</span>!
         </div>
-
         <div class="lineBig" style="color:rgba(242,215,122,.98); margin-bottom:0;">
           And church & state should stay separate.
         </div>
@@ -299,13 +281,12 @@
           </span>
         </h2>
 
-        <!-- Voltaire intentionally removed on Voltaire's page -->
-        <div class="thinkerGrid" aria-label="Thinkers grid">
-          <a href="locke.html"><img src="../images/locke_framed.webp" alt="John Locke"></a>
-          <a href="montesquieu.html"><img src="../images/montesquieu_framed.webp" alt="Montesquieu"></a>
-          <a href="rousseau.html"><img src="../images/rousseau_framed.webp" alt="Rousseau"></a>
-          <a href="hobbes.html"><img src="../images/hobbes_framed.webp" alt="Hobbes"></a>
-          <a href="wollstonecraft.html"><img src="../images/wollstonecraft_framed.webp" alt="Wollstonecraft"></a>
+        <div class="thinkerGrid">
+          <a href="7/Enlightenment/thinkers/locke.html"><img src="7/Enlightenment/images/locke_framed.webp" alt="John Locke"></a>
+          <a href="7/Enlightenment/thinkers/montesquieu.html"><img src="7/Enlightenment/images/montesquieu_framed.webp" alt="Montesquieu"></a>
+          <a href="7/Enlightenment/thinkers/rousseau.html"><img src="7/Enlightenment/images/rousseau_framed.webp" alt="Rousseau"></a>
+          <a href="7/Enlightenment/thinkers/hobbes.html"><img src="7/Enlightenment/images/hobbes_framed.webp" alt="Hobbes"></a>
+          <a href="7/Enlightenment/thinkers/wollstonecraft.html"><img src="7/Enlightenment/images/wollstonecraft_framed.webp" alt="Wollstonecraft"></a>
         </div>
       </div>
     </section>
@@ -314,7 +295,7 @@
 
   <div id="siteFooter"></div>
 
-  <script src="../config.js"></script>
-  <script src="/include.js"></script>
+  <script src="7/Enlightenment/config.js"></script>
+  <script src="include.js"></script>
 </body>
 </html>
