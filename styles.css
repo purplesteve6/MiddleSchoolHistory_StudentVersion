@@ -2,7 +2,7 @@
 
 @font-face{
   font-family: "Tommy Soft";
-  src: url("/assets/fonts/tommysoft-bold.woff2") format("woff2");
+  src: url("assets/fonts/tommysoft-bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

@@ -6,7 +6,7 @@
   const badgeEl = document.getElementById("featuredBadge");
 
   try {
-    const res = await fetch("/data/topics.json", { cache: "no-store" });
+    const res = await fetch("data/topics.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`topics.json fetch failed: ${res.status}`);
     const topics = await res.json();
 
@@ -24,7 +24,7 @@
   } catch (err) {
     // Fallback (site still looks fine)
     titleEl.textContent = "Featured Content";
-    descEl.textContent = "Add topics in /data/topics.json to enable random featured content.";
+    descEl.textContent = "Add topics in data/topics.json to enable random featured content.";
     badgeEl.textContent = "Featured Content";
     console.error(err);
   }
