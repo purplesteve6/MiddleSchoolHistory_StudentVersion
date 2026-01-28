@@ -37,9 +37,9 @@ function applyConfig(){
   const inEmperorSubfolder = /\/empe?rors\//i.test(location.pathname);
   const base = inEmperorSubfolder ? ".." : ".";
 
-  await loadInto("siteHeader", "/partials/header.html");
-  await loadInto("siteFooter", "/partials/footer.html");
-
+  // ✅ GitHub Pages-safe: no leading slash, so it respects your <base href="...">
+  await loadInto("siteHeader", "partials/header.html");
+  await loadInto("siteFooter", "partials/footer.html");
 
   applyConfig();
 })();
